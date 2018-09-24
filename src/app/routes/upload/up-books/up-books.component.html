@@ -1,0 +1,65 @@
+<form nz-form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="bookname">Book-Name</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="bookname" id="bookname">
+      <nz-form-explain *ngIf="validateForm.get('bookname').dirty && validateForm.get('bookname').errors">
+        请输入合法字符串
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="author" nzRequired>Author</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input type="text" id="author" formControlName="author">
+      <nz-form-explain *ngIf="validateForm.get('author').dirty && validateForm.get('author').errors">
+        请输入合法字符串
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="discribtion" nzRequired>describtion</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <textarea nz-input nzAutosize formControlName="description" id="describtion"  placeholder="Autosize height based on content lines">
+      </textarea>
+      <nz-form-explain *ngIf="validateForm.get('description').dirty && validateForm.get('description').errors">
+        请输入合法字符串
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="mulu" nzRequired>
+      <span>
+        目录
+        <nz-tooltip nzTitle="录入目录信息，用';'间隔 ">
+          <i nz-tooltip class="anticon anticon-question-circle-o"></i>
+        </nz-tooltip>
+      </span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <textarea nz-input id="mulu" nzAutosize formControlName="mulu" placeholder="天气真好;出门买个馒头"></textarea>
+      <nz-form-explain *ngIf="validateForm.get('mulu').dirty && validateForm.get('mulu').errors">
+        请输入合法字符串
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>出版日期</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <nz-date-picker formControlName="publishDate"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-upload (nzChange)="handleChange($event)" nzListType="picture-card" [nzBeforeUpload]="beforeUpload">
+    <button nz-button *ngIf="!imgUrl">
+      <i class="anticon anticon-upload"></i><span>Select File</span>
+    </button>
+    <img *ngIf="imgrUrl" [src]="imgrUrl" class="bookimg">
+  </nz-upload>
+  
+  <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="!file || validateForm.valid === false"
+    style="margin-top: 16px">
+    {{ uploading ? 'Uploading' : 'Start Upload' }}
+  </button>
+
+
+</form>

@@ -89,6 +89,11 @@ export class StartupService {
             icon: 'anticon anticon-appstore-o'
           },
           {
+            text: '上传图书',
+            link: '/upload',
+            icon: 'anticon anticon-appstore-o'
+          },
+          {
             text: '快捷菜单',
             icon: 'anticon anticon-rocket',
             shortcutRoot: true
@@ -109,7 +114,7 @@ export class StartupService {
       // http
       // this.viaHttp(resolve, reject);
       // mock：请勿在生产环境中这么使用，viaMock 单纯只是为了模拟一些数据使脚手架一开始能正常运行
-      this.viaHttp(resolve, reject);
+      this.viaMock(resolve, reject);
     });
   }
 }
